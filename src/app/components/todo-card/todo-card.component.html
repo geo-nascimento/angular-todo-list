@@ -1,0 +1,64 @@
+<mat-tab-group color="accent" *ngIf="todoList().length > 0; else withoutTodos">
+	<mat-tab label="Em andamento">
+		<div class="" *ngFor="let tarefa of todoList()">
+			<mat-card class="todo_card" *ngIf="tarefa?.done === false">
+				<mat-card-header>
+					<mat-card-title class="todo_card_title">{{tarefa.title}}</mat-card-title>
+					<mat-card-subtitle class="todo_card_subtitle">{{tarefa.description}}</mat-card-subtitle>
+				</mat-card-header>
+				<mat-card-actions align="end">
+					<button
+						class="header_btn check-btn"
+						mat-icon-button
+						aria-label="Concluir tarefa"
+						(click)="handleDoneTodo(tarefa.id)"
+					>
+						<mat-icon>done_all</mat-icon>
+					</button>
+					<button
+						class="header_btn check-btn todo_form_delete_btn"
+						mat-icon-button
+						aria-label="Deletar tarefa"
+						(click)="handleDeleteTodo(tarefa)"
+					>
+						<mat-icon>delete_forever</mat-icon>
+					</button>
+				</mat-card-actions>
+			</mat-card>
+		</div>
+	</mat-tab>
+
+	<mat-tab label="Concluídas">
+		<div class="" *ngFor="let tarefa of todoList()">
+			<mat-card class="todo_card" *ngIf="tarefa?.done === true">
+				<mat-card-header>
+					<mat-card-title class="todo_card_title">{{tarefa.title}}</mat-card-title>
+					<mat-card-subtitle class="todo_card_subtitle">{{tarefa.description}}</mat-card-subtitle>
+				</mat-card-header>
+				<mat-card-actions align="end">
+					<button
+						class="header_btn check-btn"
+						mat-icon-button
+						aria-label="Concluir tarefa"
+						(click)="handleDoneTodo(tarefa.id)"
+					>
+						<mat-icon>done_all</mat-icon>
+					</button>
+					<button
+						class="header_btn check-btn todo_form_delete_btn"
+						mat-icon-button
+						aria-label="Deletar Tarefa"
+						(click)="handleDeleteTodo(tarefa)"
+					>
+						<mat-icon>delete_forever</mat-icon>
+					</button>
+				</mat-card-actions>
+			</mat-card>
+		</div>
+	</mat-tab>
+</mat-tab-group>
+
+
+<ng-template #withoutTodos>
+	<h3 class="warn_message">Não há tarefas a serem exibidas</h3>
+</ng-template>
